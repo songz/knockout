@@ -113,20 +113,31 @@ body {
     }
 }
 
+$logo-container-height: 150px;
 .logo-container {
-  height: 120px;
+  height: $logo-container-height;
+  position:relative;
 }
 
+$event-logo-height: 73px;
+$event-logo-width: 393px;
 .event-logo {
+  margin-top: ($logo-container-height - $event-logo-height) / 2;
   background: url(/img/nko-logo.png);
-  width: 393px;
-  height: 73px;
+  width: $event-logo-width;
+  height: $event-logo-height;
 }
 
+$opentok-logo-height: 64px;
+$opentok-logo-width: 200px;
 .opentok-logo {
+  position:absolute;
+  right:0;
+  top:0;
+  margin-top: ($logo-container-height - $opentok-logo-height) / 2;
   background: url(/img/opentok-logo.png);
-  width: 200px;
-  height: 64px;
+  width: $opentok-logo-width;
+  height: $opentok-logo-height;
 }
 
 // Image Replacement
