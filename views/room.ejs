@@ -19,46 +19,38 @@
     <h2 class="ir opentok-logo"><a href="http://tokbox.com">Powered by OpenTok</a></h2>
   </div>
 
-<div class="container">
-  <section id="title">
-    <div id="title_content">
-      <p class="titleText"><%= rid %></p>
-      <p>
-      Share Link: 
-      <a href="https://opentokrtc.com/<%= rid %>">
-        https://opentokrtc.com/<%= rid %>
-      </a>
-      </p>
-    </div>
-  </section>
+  <div class="container">
+    <div class="row content-row">
 
-  <div id="streams_container">
-    <div class="streamContainer">
-      <div id="myPublisher"></div>
-    </div>
-  </div>
-
-  <div id="chatroom">
-    <div id="chatElementContainer">
-      <div id="displayChat"><ul id=""></ul></div>
-      <div id="chatInput">
-        <input type="" id="messageInput" disabled/>
-        <i class="icon-comments-alt"></i>
+      <div class="video-chat col-md-8" id="streams_container">
+        <div class="streamContainer">
+          <div id="myPublisher"></div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div id="filterContainer">
-    <h1>Filters: </h1>
-    <div id="filterOptions">
-      <h1 class="filterOption" data-value="Blur">Blur</h1>
-      <h1 class="filterOption" data-value="Sepia">Sepia</h1>
-      <h1 class="filterOption" data-value="Grayscale" >Grayscale</h1>
-      <h1 class="filterOption" data-value="Invert" >Invert</h1>
-      <h1 class="filterOption optionSelected" data-value="None">None</h1>
+      <div class="text-chat col-md-4" id="chatroom">
+        <div id="chatElementContainer">
+          <div id="displayChat"><ul id=""></ul></div>
+          <div id="chatInput">
+            <input type="" id="messageInput" disabled/>
+            <i class="icon-comments-alt"></i>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    <div class="sponsors">
+      <h3>Thanks to our Platinum Sponsors</h3>
+      <ul>
+        <li><a class="ir" href="#">GoInstant</a></li>
+        <li><a class="ir" href="#">The Node Firm</a></li>
+        <li><a class="ir" href="#">Joyent</a></li>
+        <li><a class="ir" href="#">Groupon</a></li>
+      </ul>
+    </div>
+
   </div>
-</div>
 
 
 <script id="messageTemplate" type="text/x-handlebars-template">

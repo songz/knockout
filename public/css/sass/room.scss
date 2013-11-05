@@ -2,38 +2,12 @@
 @import "filters";
 @import "chatBox";
 
-section {
-}
-
 body {
-    // Crutches: these should be removed while modularizing the styles.
-    // It was put here just to help make things "work" and get a usable 
-    // version out.
-    //@include radialBackground( $darkBrown, $lightBrown );
-    background-color: #181818;
-
     * { box-sizing: content-box; }
 
-    // TODO: list of modules
-    // * StreamsContainer
-    // * StreamContainer
-    // * ChatArea
-    // * VideoEffects?
-
-    .container{
-      //position: fixed;
-      //top:0;
-      //bottom:0;
-      //right:0;
-      //left:0;
-    }
+    background-color: #181818;
 
     #streams_container{
-      //position:fixed;
-      //top: 75px;
-      //bottom: 42px;
-      //right: 395px;
-      //left: 0px;
       text-align:center;
       box-sizing: border-box;
 
@@ -75,42 +49,6 @@ body {
     .clickThrough{
       pointer-events:none;
     }
-
-    #title{
-      //position:fixed;
-      //top:0;
-      //right: 400px;
-      //left: 0px;
-      height:70px;
-      width: 300px;
-      margin: auto;
-    }
-
-    #title_content{
-      position:relative;
-      width:100%;
-      height:100%;
-      background-color: rgba(0,0,0,0.5);
-      p{
-        color: #eeeef2;
-        text-align:center;
-        a{
-          color: $pink;
-        }
-      }
-    }
-
-    #title_content .titleText{
-      width: 100%;
-      height:30px;
-      text-align:center;
-      color: $hdrContrastColor;
-      font-family: $avantFont;
-      font-weight: lighter;
-      vertical-align:middle;
-      line-height:100%;
-      font-size: 30px;
-    }
 }
 
 $logo-container-height: 150px;
@@ -138,6 +76,20 @@ $opentok-logo-width: 200px;
   background: url(/img/opentok-logo.png);
   width: $opentok-logo-width;
   height: $opentok-logo-height;
+}
+
+$content-row-height: 600px;
+.content-row {
+  height: $content-row-height;
+}
+
+$video-chat-height: $content-row-height;
+.video-chat {
+  height: $video-chat-height;
+}
+$text-chat-height: $content-row-height;
+.text-chat {
+  height: $text-chat-height;
 }
 
 // Image Replacement

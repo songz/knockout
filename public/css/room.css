@@ -184,30 +184,6 @@ body {
       display: none; }
   body .clickThrough {
     pointer-events: none; }
-  body #title {
-    height: 70px;
-    width: 300px;
-    margin: auto; }
-  body #title_content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); }
-    body #title_content p {
-      color: #eeeef2;
-      text-align: center; }
-      body #title_content p a {
-        color: #1ba3dd; }
-  body #title_content .titleText {
-    width: 100%;
-    height: 30px;
-    text-align: center;
-    color: white;
-    font-family: "AvantGardeGothicITCW01X";
-    font-weight: lighter;
-    vertical-align: middle;
-    line-height: 100%;
-    font-size: 30px; }
 
 .logo-container {
   height: 150px;
@@ -227,6 +203,15 @@ body {
   background: url(/img/opentok-logo.png);
   width: 200px;
   height: 64px; }
+
+.content-row {
+  height: 600px; }
+
+.video-chat {
+  height: 600px; }
+
+.text-chat {
+  height: 600px; }
 
 .ir {
   border: 0;
