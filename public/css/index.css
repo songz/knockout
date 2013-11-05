@@ -41,13 +41,18 @@ h1 {
   font-size: 60px;
   line-height: 100%;
   margin-top: 0;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-transform: capitalize;
   text-align: center;
   line-height: 100%; }
 
 #roomContainer {
+  margin-top: 50px;
   margin-bottom: 100px; }
+
+#roomsContainer {
+  max-height: 500px;
+  overflow: auto; }
 
 #searchRoom {
   background-color: transparent;
@@ -109,8 +114,7 @@ h1 {
   margin: 10px;
   font-size: 15px;
   padding: 10px;
-  cursor: pointer;
-  max-height: 500px; }
+  cursor: pointer; }
 
 input {
   vertical-align: bottom; }
@@ -132,4 +136,4 @@ input:-ms-input-placeholder {
   line-height: 130%; }
 
 #infoBox {
-  margin-top: 50px; }
+  margin-top: 0px; }
