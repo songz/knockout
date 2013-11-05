@@ -72,6 +72,12 @@
         _this.roomData = dataSnapshot.val();
         return $(".titleText").text(_this.roomData.name);
       });
+      this.presenceRef = new Firebase("https://nodeknockout.firebaseIO.com/" + this.rid + "/users");
+      this.presenceRef.once("value", function(snap) {
+        var con;
+        con = _this.presenceRef.push(true);
+        return con.onDisconnect().remove();
+      });
       this.initialized = false;
       this.chatData = [];
       this.filterData = {};

@@ -11,6 +11,10 @@ class User
     @myRootRef.once 'value', (dataSnapshot) =>
       @roomData = dataSnapshot.val()
       $(".titleText").text( @roomData.name )
+    @presenceRef = new Firebase("https://nodeknockout.firebaseIO.com/#{@rid}/users")
+    @presenceRef.once "value", (snap) =>
+      con = @presenceRef.push( true )
+      con.onDisconnect().remove()
 
     # variables
     @initialized = false

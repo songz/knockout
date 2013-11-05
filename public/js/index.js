@@ -53,6 +53,7 @@
     for (k in _ref) {
       v = _ref[k];
       v.url = "/" + k;
+      v.usersCount = v.users ? Object.keys(v.users).length : 0;
       _results.push($("#roomsContainer").append(roomTemplate(v)));
     }
     return _results;

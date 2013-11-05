@@ -35,4 +35,5 @@ myRootRef = new Firebase('https://nodeknockout.firebaseIO.com/')
 myRootRef.once 'value', (dataSnapshot) ->
   for k,v of dataSnapshot.val()
     v.url = "/#{k}"
+    v.usersCount = if v.users then Object.keys( v.users ).length else 0
     $("#roomsContainer").append roomTemplate( v )
