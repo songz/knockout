@@ -75,8 +75,14 @@
       this.presenceRef = new Firebase("https://nodeknockout.firebaseIO.com/" + this.rid + "/users");
       this.presenceRef.once("value", function(snap) {
         var con;
+        console.log("presenceRef callback");
         con = _this.presenceRef.push(true);
-        return con.onDisconnect().remove();
+        con.onDisconnect().remove();
+        _this.myRootRef.setPriority(-Date.now());
+        return window.setInterval(function() {
+          console.log("setting priority");
+          return _this.myRootRef.setPriority(-Date.now());
+        }, 60000);
       });
       this.initialized = false;
       this.chatData = [];

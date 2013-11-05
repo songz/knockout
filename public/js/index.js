@@ -20,10 +20,10 @@
     roomName = $("#roomName").val();
     roomDescription = $("#roomDescription").val();
     roomId = "" + (Date.now() % 10000000) + (Math.floor(Math.random() * 10000));
-    return myRootRef.child(roomId).set({
+    return myRootRef.child(roomId).setWithPriority({
       name: roomName,
       description: roomDescription
-    }, function() {
+    }, -Date.now(), function() {
       return window.location = "/" + roomId;
     });
   });

@@ -13,7 +13,7 @@ $('#submitRoomButton').click ->
   roomName = $("#roomName").val()
   roomDescription = $("#roomDescription").val()
   roomId = "#{Date.now()%10000000}#{Math.floor(Math.random()*10000)}"
-  myRootRef.child( roomId ).set {name: roomName, description: roomDescription}, ->
+  myRootRef.child( roomId ).setWithPriority {name: roomName, description: roomDescription}, -Date.now(), ->
     window.location = "/#{roomId}"
 
 $('#roomName').keypress (e) ->

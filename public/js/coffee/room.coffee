@@ -13,8 +13,15 @@ class User
       $(".titleText").text( @roomData.name )
     @presenceRef = new Firebase("https://nodeknockout.firebaseIO.com/#{@rid}/users")
     @presenceRef.once "value", (snap) =>
+      console.log "presenceRef callback"
       con = @presenceRef.push( true )
       con.onDisconnect().remove()
+      @myRootRef.setPriority( -Date.now() )
+      window.setInterval =>
+        console.log "setting priority"
+        @myRootRef.setPriority( -Date.now() )
+      , 60000
+
 
     # variables
     @initialized = false
