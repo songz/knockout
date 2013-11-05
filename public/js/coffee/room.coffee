@@ -7,6 +7,10 @@ class User
     @messageTemplate = Handlebars.compile( $("#messageTemplate").html() )
     @userStreamTemplate = Handlebars.compile( $("#userStreamTemplate").html() )
     @notifyTemplate = Handlebars.compile( $("#notifyTemplate").html() )
+    @myRootRef = new Firebase("https://nodeknockout.firebaseIO.com/#{@rid}")
+    @myRootRef.once 'value', (dataSnapshot) =>
+      @roomData = dataSnapshot.val()
+      $(".titleText").text( @roomData.name )
 
     # variables
     @initialized = false
@@ -195,7 +199,7 @@ class User
     $('#displayChat')[0].scrollTop = $('#displayChat')[0].scrollHeight
   printCommands: ->
     @displayChatMessage( @notifyTemplate( {message: "-----------"} ) )
-    @displayChatMessage( @notifyTemplate( {message: "Welcome to OpenTokRTC."} ) )
+    @displayChatMessage( @notifyTemplate( {message: "Welcome to Knockout Chat."} ) )
     @displayChatMessage( @notifyTemplate( {message: "Type /nick your_name to change your name"} ) )
     @displayChatMessage( @notifyTemplate( {message: "Type /list to see list of users in the room"} ) )
     @displayChatMessage( @notifyTemplate( {message: "Type /help to see a list of commands"} ) )
