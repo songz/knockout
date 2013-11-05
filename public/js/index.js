@@ -2,7 +2,7 @@
 (function() {
   var goToRoom, myRootRef, roomTemplate, verticalCenter;
 
-  $("#roomName").focus();
+  $("#searchRoom").focus();
 
   goToRoom = function() {
     var roomName;
@@ -19,6 +19,10 @@
     var roomDescription, roomId, roomName;
     roomName = $("#roomName").val();
     roomDescription = $("#roomDescription").val();
+    if (roomName.length < 3 || roomDescription.length < 3 || roomName.length > 100 || roomDescription.length > 200) {
+      alert("Invalid Room Name or Room Description. Max number of characters for room name is 100 characters, for room description is 200 characters");
+      return;
+    }
     roomId = "" + (Date.now() % 10000000) + (Math.floor(Math.random() * 10000));
     return myRootRef.child(roomId).setWithPriority({
       name: roomName,
@@ -28,10 +32,13 @@
     });
   });
 
-  $('#roomName').keypress(function(e) {
-    if (e.keyCode === 13) {
-      return goToRoom();
+  $('#searchRoom').keyup(function(e) {
+    if ($(this).val().length > 0) {
+      $(".roomInformation").hide();
+      $(".roomInformation[data-info*=" + ($(this).val()) + "]").show();
+      return;
     }
+    return $(".roomInformation").show();
   });
 
   verticalCenter = function() {
