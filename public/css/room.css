@@ -213,6 +213,42 @@ body {
 .text-chat {
   height: 600px; }
 
+.sponsors {
+  margin-top: 100px; }
+  .sponsors h3 {
+    font-family: "franklin-gothic-urw",sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    color: gray;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: 0 auto;
+    width: 500px;
+    padding-bottom: 8px;
+    padding-right: 50px;
+    padding-left: 50px;
+    border-bottom: 1px solid gray; }
+
+.goinstant-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.nodefirm-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.joyent-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.groupon-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
 .ir {
   border: 0;
   font: 0/0 a;
