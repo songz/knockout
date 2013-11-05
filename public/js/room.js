@@ -78,7 +78,6 @@
         console.log("presenceRef callback");
         con = _this.presenceRef.push(true);
         con.onDisconnect().remove();
-        _this.myRootRef.setPriority(-Date.now());
         return window.setInterval(function() {
           console.log("setting priority");
           return _this.myRootRef.setPriority(-Date.now());

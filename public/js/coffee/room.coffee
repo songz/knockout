@@ -16,7 +16,6 @@ class User
       console.log "presenceRef callback"
       con = @presenceRef.push( true )
       con.onDisconnect().remove()
-      @myRootRef.setPriority( -Date.now() )
       window.setInterval =>
         console.log "setting priority"
         @myRootRef.setPriority( -Date.now() )
