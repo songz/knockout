@@ -40,10 +40,6 @@
   color: white;
   padding-top: 10px;
   text-align: center;
-  position: fixed;
-  bottom: 0px;
-  right: 400px;
-  left: 0px;
   background-color: #EEE; }
   #filterContainer h1 {
     display: inline;

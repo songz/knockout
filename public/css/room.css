@@ -55,10 +55,6 @@
   color: white;
   padding-top: 10px;
   text-align: center;
-  position: fixed;
-  bottom: 0px;
-  right: 400px;
-  left: 0px;
   background-color: #EEE; }
   #filterContainer h1 {
     display: inline;
@@ -167,18 +163,7 @@ body {
   background-image: -o-radial-gradient(50% 50%, circle, #433931, #1e1916); }
   body * {
     box-sizing: content-box; }
-  body .container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0; }
   body #streams_container {
-    position: fixed;
-    top: 75px;
-    bottom: 42px;
-    right: 395px;
-    left: 0px;
     text-align: center;
     box-sizing: border-box; }
     body #streams_container .streamContainer {
@@ -210,10 +195,6 @@ body {
   body .clickThrough {
     pointer-events: none; }
   body #title {
-    position: fixed;
-    top: 0;
-    right: 400px;
-    left: 0px;
     height: 70px;
     width: 300px;
     margin: auto; }
