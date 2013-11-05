@@ -14,6 +14,9 @@
  * Layout
  */
 /*
+ * ChatBox
+ */
+/*
  * Mixins
  */
 /*
@@ -27,6 +30,9 @@
  */
 /*
  * Layout
+ */
+/*
+ * ChatBox
  */
 .Blur video {
   -webkit-filter: Blur(15px);
@@ -55,10 +61,6 @@
   color: white;
   padding-top: 10px;
   text-align: center;
-  position: fixed;
-  bottom: 0px;
-  right: 400px;
-  left: 0px;
   background-color: #EEE; }
   #filterContainer h1 {
     display: inline;
@@ -97,18 +99,24 @@
 /*
  * Layout
  */
+/*
+ * ChatBox
+ */
 #chatroom {
   background: white;
   border: 3px solid #1ba3dd;
-  position: fixed;
+  position: absolute;
   top: 0;
-  right: 0;
+  right: 15px;
   bottom: 0;
+  padding: 0;
   width: 400px;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  height: 100%; }
 
 #chatElementContainer {
   height: 100%;
+  width: 100%;
   position: relative; }
 
 #displayChat {
@@ -153,34 +161,22 @@
     font-size: 30px;
     position: relative;
     left: 10px;
-    top: -25px;
+    top: -40px;
     color: #8D8F8F;
     float: left; }
 
 body {
-  background: #433931 no-repeat center center fixed;
-  /* Old browsers */
-  background-image: radial-gradient(circle at 50% 50%, #433931, #1e1916);
-  background-image: -webkit-radial-gradient(50% 50%, circle, #433931, #1e1916);
-  background-image: -moz-radial-gradient(50% 50%, circle, #433931, #1e1916);
-  background-image: -ms-radial-gradient(50% 50%, circle, #433931, #1e1916);
-  background-image: -o-radial-gradient(50% 50%, circle, #433931, #1e1916); }
+  background-color: #181818; }
   body * {
     box-sizing: content-box; }
-  body .container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0; }
   body #streams_container {
-    position: fixed;
-    top: 75px;
-    bottom: 42px;
-    right: 395px;
-    left: 0px;
     text-align: center;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 15px;
+    right: 415px; }
     body #streams_container .streamContainer {
       display: inline-block;
       position: relative;
@@ -209,31 +205,88 @@ body {
       display: none; }
   body .clickThrough {
     pointer-events: none; }
-  body #title {
-    position: fixed;
-    top: 0;
-    right: 400px;
-    left: 0px;
-    height: 70px;
-    width: 300px;
-    margin: auto; }
-  body #title_content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); }
-    body #title_content p {
-      color: #eeeef2;
-      text-align: center; }
-      body #title_content p a {
-        color: #1ba3dd; }
-  body #title_content .titleText {
-    width: 100%;
-    height: 30px;
+
+.meatContainer {
+  position: relative;
+  height: 300px; }
+
+.logo-container {
+  height: 150px;
+  position: relative; }
+
+.event-logo {
+  margin-top: 38.5px;
+  background: url(/img/nko-logo.png);
+  width: 393px;
+  height: 73px; }
+
+.opentok-logo {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  margin-top: 43px;
+  background: url(/img/opentok-logo.png);
+  width: 200px;
+  height: 64px; }
+
+.titleText {
+  position: absolute;
+  top: 0;
+  right: 260px;
+  left: 443px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 57px;
+  height: 73px; }
+
+.content-row {
+  height: 600px; }
+
+.video-chat {
+  height: 600px; }
+
+.text-chat {
+  height: 600px; }
+
+.sponsors {
+  margin-top: 100px; }
+  .sponsors h3 {
+    font-family: "franklin-gothic-urw",sans-serif;
+    text-transform: uppercase;
     text-align: center;
-    color: white;
-    font-family: "AvantGardeGothicITCW01X";
-    font-weight: lighter;
-    vertical-align: middle;
-    line-height: 100%;
-    font-size: 30px; }
+    color: gray;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: 0 auto;
+    width: 500px;
+    padding-bottom: 8px;
+    padding-right: 50px;
+    padding-left: 50px;
+    border-bottom: 1px solid gray; }
+
+.goinstant-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.nodefirm-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.joyent-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.groupon-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.ir {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent; }

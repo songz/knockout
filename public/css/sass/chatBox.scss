@@ -2,16 +2,19 @@
 #chatroom{
   background:white;
   border:3px solid $pink;
-  position:fixed;
+  position:absolute;
   top:0;
-  right:0;
+  right:$containerPadding;
   bottom:0;
-  width: 400px;
+  padding: 0;
+  width: $chatBoxWidth;
   box-sizing: border-box;
+  height: 100%;
 }
 
 #chatElementContainer{
   height:100%;
+  width: 100%;
   position:relative;
 }
 
@@ -63,7 +66,7 @@
     font-size:30px;
     position:relative;
     left:10px;
-    top:-25px;
+    top:-40px;
     color:#8D8F8F;
     float:left;
   }

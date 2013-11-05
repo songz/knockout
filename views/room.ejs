@@ -2,54 +2,53 @@
 <html lang="en">
 <head>
   <title>WebRTC Demo - Video chatting in room <%= rid %></title>
-  <% include _header %>
+  <% include _header_bootstrap3 %>
+  <% include _font_franklin %>
   <link rel="stylesheet" href="/css/room.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <script src="//swww.tokbox.com/webrtc/v2.0/js/TB.min.js"></script>
   <script src="/js/layoutContainer.js" type="text/javascript"></script>
 </head>
 <body>
 
 <div class="container">
-  <section id="title">
-    <div id="title_content">
-      <p class="titleText">Room</p>
-      <p>
-      Share Link: 
-      <a href="https://opentokrtc.com/<%= rid %>">
-        https://opentokrtc.com/<%= rid %>
-      </a>
-      </p>
-    </div>
-  </section>
+  <% include _knockout_header %>
 
-  <div id="streams_container">
-    <div class="streamContainer">
-      <div id="myPublisher"></div>
-    </div>
+  <div class="container logo-container">
+    <h1 class="ir event-logo">Node Knockout 2013 Live</h1>
+    <h1 class="titleText">Room</h1>
+    <h2 class="ir opentok-logo"><a href="http://tokbox.com">Powered by OpenTok</a></h2>
   </div>
 
-  <div id="chatroom">
-    <div id="chatElementContainer">
-      <div id="displayChat"><ul id=""></ul></div>
-      <div id="chatInput">
-        <input type="" id="messageInput" disabled/>
-        <i class="icon-comments-alt"></i>
+  <div class="container meatContainer">
+      <div class="video-chat" id="streams_container">
+        <div class="streamContainer">
+          <div id="myPublisher"></div>
+        </div>
       </div>
-    </div>
+
+      <div class="text-chat" id="chatroom">
+        <div id="chatElementContainer">
+          <div id="displayChat"><ul id=""></ul></div>
+          <div id="chatInput">
+            <input type="" id="messageInput" disabled/>
+            <i class="icon-comments-alt"></i>
+          </div>
+        </div>
+      </div>
   </div>
 
-  <div id="filterContainer">
-    <h1>Filters: </h1>
-    <div id="filterOptions">
-      <h1 class="filterOption" data-value="Blur">Blur</h1>
-      <h1 class="filterOption" data-value="Sepia">Sepia</h1>
-      <h1 class="filterOption" data-value="Grayscale" >Grayscale</h1>
-      <h1 class="filterOption" data-value="Invert" >Invert</h1>
-      <h1 class="filterOption optionSelected" data-value="None">None</h1>
+  <div class="container">
+    <div class="sponsors">
+      <h3>Thanks to our Platinum Sponsors</h3>
+      <ul class="list-inline">
+        <li><a class="goinstant-logo ir" href="#">GoInstant</a></li>
+        <li><a class="nodefirm-logo ir" href="#">The Node Firm</a></li>
+        <li><a class="joyent-logo ir" href="#">Joyent</a></li>
+        <li><a class="groupon-logo ir" href="#">Groupon</a></li>
+      </ul>
     </div>
   </div>
-</div>
-
 
 <script id="messageTemplate" type="text/x-handlebars-template">
 <div class="chatMessage"><em>{{name}}: </em>{{{text}}}</div>

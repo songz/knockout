@@ -2,39 +2,19 @@
 @import "filters";
 @import "chatBox";
 
-section {
-}
-
 body {
-    // Crutches: these should be removed while modularizing the styles.
-    // It was put here just to help make things "work" and get a usable 
-    // version out.
-    @include radialBackground( $darkBrown, $lightBrown );
-
     * { box-sizing: content-box; }
 
-    // TODO: list of modules
-    // * StreamsContainer
-    // * StreamContainer
-    // * ChatArea
-    // * VideoEffects?
-
-    .container{
-      position: fixed;
-      top:0;
-      bottom:0;
-      right:0;
-      left:0;
-    }
+    background-color: #181818;
 
     #streams_container{
-      position:fixed;
-      top: 75px;
-      bottom: 42px;
-      right: 395px;
-      left: 0px;
       text-align:center;
       box-sizing: border-box;
+      position:absolute;
+      height: 100%;
+      top:0;
+      left: $containerPadding;
+      right: $chatBoxWidth+$containerPadding;
 
       .streamContainer{
         display: inline-block;
@@ -74,41 +54,110 @@ body {
     .clickThrough{
       pointer-events:none;
     }
-
-    #title{
-      position:fixed;
-      top:0;
-      right: 400px;
-      left: 0px;
-      height:70px;
-      width: 300px;
-      margin: auto;
-    }
-
-    #title_content{
-      position:relative;
-      width:100%;
-      height:100%;
-      background-color: rgba(0,0,0,0.5);
-      p{
-        color: #eeeef2;
-        text-align:center;
-        a{
-          color: $pink;
-        }
-      }
-    }
-
-    #title_content .titleText{
-      width: 100%;
-      height:30px;
-      text-align:center;
-      color: $hdrContrastColor;
-      font-family: $avantFont;
-      font-weight: lighter;
-      vertical-align:middle;
-      line-height:100%;
-      font-size: 30px;
-    }
 }
 
+.meatContainer{
+  position:relative;
+  height: $defaultMeatHeight;
+}
+
+$logo-container-height: 150px;
+.logo-container {
+  height: $logo-container-height;
+  position:relative;
+}
+
+$event-logo-height: 73px;
+$event-logo-width: 393px;
+.event-logo {
+  margin-top: ($logo-container-height - $event-logo-height) / 2;
+  background: url(/img/nko-logo.png);
+  width: $event-logo-width;
+  height: $event-logo-height;
+}
+
+$opentok-logo-height: 64px;
+$opentok-logo-width: 200px;
+.opentok-logo {
+  position:absolute;
+  right:$containerPadding;
+  top:0;
+  margin-top: ($logo-container-height - $opentok-logo-height) / 2;
+  background: url(/img/opentok-logo.png);
+  width: $opentok-logo-width;
+  height: $opentok-logo-height;
+}
+
+.titleText{
+  position: absolute;
+  top:0;
+  right: $opentok-logo-width+60px;
+  left: $event-logo-width+50px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  margin-top: ($logo-container-height - 36px) / 2;
+  height: $event-logo-height;
+}
+
+
+$content-row-height: 600px;
+.content-row {
+  height: $content-row-height;
+}
+
+$video-chat-height: $content-row-height;
+.video-chat {
+  height: $video-chat-height;
+}
+$text-chat-height: $content-row-height;
+.text-chat {
+  height: $text-chat-height;
+}
+
+.sponsors {
+  margin-top: 100px;
+  h3 {
+    font-family: "franklin-gothic-urw",sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    color: gray;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: 0 auto;
+    width: 500px;
+    padding-bottom: 8px;
+    padding-right: 50px;
+    padding-left: 50px;
+    border-bottom:1px solid gray;
+  }
+}
+
+.goinstant-logo {
+  width: 100px ;
+  height: 100px ;
+  background: red;
+}
+.nodefirm-logo {
+  width: 100px ;
+  height: 100px ;
+  background: red;
+}
+.joyent-logo {
+  width: 100px ;
+  height: 100px ;
+  background: red;
+}
+.groupon-logo {
+  width: 100px ;
+  height: 100px ;
+  background: red;
+}
+
+// Image Replacement
+.ir {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color:transparent;
+}
