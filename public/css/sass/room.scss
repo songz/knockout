@@ -9,7 +9,8 @@ body {
     // Crutches: these should be removed while modularizing the styles.
     // It was put here just to help make things "work" and get a usable 
     // version out.
-    @include radialBackground( $darkBrown, $lightBrown );
+    //@include radialBackground( $darkBrown, $lightBrown );
+    background-color: #181818;
 
     * { box-sizing: content-box; }
 
@@ -112,3 +113,26 @@ body {
     }
 }
 
+.logo-container {
+  height: 120px;
+}
+
+.event-logo {
+  background: url(/img/nko-logo.png);
+  width: 393px;
+  height: 73px;
+}
+
+.opentok-logo {
+  background: url(/img/opentok-logo.png);
+  width: 200px;
+  height: 64px;
+}
+
+// Image Replacement
+.ir {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color:transparent;
+}
