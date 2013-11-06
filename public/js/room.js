@@ -22,6 +22,9 @@
       this.subscribeStreams = function(streams) {
         return User.prototype.subscribeStreams.apply(_this, arguments);
       };
+      this.createSubscriber = function(stream) {
+        return User.prototype.createSubscriber.apply(_this, arguments);
+      };
       this.removeStream = function(cid) {
         return User.prototype.removeStream.apply(_this, arguments);
       };
@@ -87,6 +90,8 @@
       this.chatData = [];
       this.filterData = {};
       this.allUsers = {};
+      this.streams = {};
+      this.subscribers = {};
       this.printCommands();
       this.publisher = TB.initPublisher(this.apiKey, "myPublisher", {
         width: 240,
@@ -105,6 +110,59 @@
       this.session.on("signal:name", this.signalNameHandler);
       this.session.connect(this.apiKey, this.token);
       self = this;
+      $(".roomOption").click(function() {
+        var k, v, _ref, _ref1, _ref2, _ref3;
+        if (!$(this).hasClass("readyOption")) {
+          return;
+        }
+        if ($(this).hasClass("publishOption") && $(this).hasClass("optionSelected")) {
+          self.session.unpublish(self.publisher);
+          $(this).removeClass("readyOption");
+        }
+        if ($(this).hasClass("publishOption") && !$(this).hasClass("optionSelected")) {
+          self.session.publish(self.publisher);
+          $(this).removeClass("readyOption");
+        }
+        if ($(this).hasClass("textOption") && !$(this).hasClass("optionSelected")) {
+          _ref = self.subscribers;
+          for (k in _ref) {
+            v = _ref[k];
+            self.removeStream(v.stream.connection.connectionId);
+            self.session.unsubscribe(v);
+          }
+          console.log("finished unsubscribing");
+          $(this).addClass("optionSelected");
+          ResizeLayoutContainer();
+          return;
+        }
+        if ($(this).hasClass("textOption") && $(this).hasClass("optionSelected")) {
+          $(this).removeClass("optionSelected");
+          _ref1 = self.streams;
+          for (k in _ref1) {
+            v = _ref1[k];
+            self.createSubscriber(v);
+          }
+          ResizeLayoutContainer();
+          return;
+        }
+        if ($(this).hasClass("audioOption") && !$(this).hasClass("optionSelected")) {
+          _ref2 = self.subscribers;
+          for (k in _ref2) {
+            v = _ref2[k];
+            v.subscribeToVideo(false);
+          }
+          $(this).addClass("optionSelected");
+          return;
+        }
+        if ($(this).hasClass("audioOption") && $(this).hasClass("optionSelected")) {
+          _ref3 = self.subscribers;
+          for (k in _ref3) {
+            v = _ref3[k];
+            v.subscribeToVideo(true);
+          }
+          $(this).removeClass("optionSelected");
+        }
+      });
       $(".filterOption").click(function() {
         var prop;
         $(".filterOption").removeClass("optionSelected");
@@ -124,6 +182,8 @@
     }
 
     User.prototype.sessionConnectedHandler = function(event) {
+      $(".audioOption").addClass("readyOption");
+      $(".textOption").addClass("readyOption");
       console.log("session connected");
       this.subscribeStreams(event.streams);
       this.session.publish(this.publisher);
@@ -146,7 +206,8 @@
     };
 
     User.prototype.streamCreatedHandler = function(event) {
-      console.log("streamCreated");
+      $(".audioOption").addClass("readyOption");
+      $(".textOption").addClass("readyOption");
       this.subscribeStreams(event.streams);
       return ResizeLayoutContainer();
     };
@@ -157,9 +218,14 @@
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         stream = _ref[_i];
         if (this.session.connection.connectionId === stream.connection.connectionId) {
-          return;
+          $(".publishOption").removeClass("optionSelected");
+          $(".publishOption").addClass("readyOption");
+          event.preventDefault();
+        } else {
+          delete this.streams[stream.connection.connectionId];
+          delete this.subscribers[stream.connection.connectionId];
+          this.removeStream(stream.connection.connectionId);
         }
-        this.removeStream(stream.connection.connectionId);
       }
       return ResizeLayoutContainer();
     };
@@ -324,43 +390,61 @@
     User.prototype.removeStream = function(cid) {
       var element$;
       element$ = $(".stream" + cid);
-      return element$.remove();
+      if (element$) {
+        return element$.remove();
+      }
+    };
+
+    User.prototype.createSubscriber = function(stream) {
+      var divId, divId$, prop, self, streamConnectionId;
+      if ($(".textOption").hasClass('optionSelected')) {
+        return;
+      }
+      streamConnectionId = stream.connection.connectionId;
+      divId = "stream" + streamConnectionId;
+      $("#streams_container").append(this.userStreamTemplate({
+        id: divId
+      }));
+      prop = {
+        width: 240,
+        height: 190
+      };
+      prop.subscribeToVideo = $(".audioOption").hasClass('optionSelected') ? false : true;
+      this.subscribers[streamConnectionId] = this.session.subscribe(stream, divId, prop);
+      this.applyClassFilter(this.filterData[streamConnectionId], ".stream" + streamConnectionId);
+      divId$ = $("." + divId);
+      divId$.mouseenter(function() {
+        return $(this).find('.flagUser').show();
+      });
+      divId$.mouseleave(function() {
+        return $(this).find('.flagUser').hide();
+      });
+      self = this;
+      return divId$.find('.flagUser').click(function() {
+        var streamConnection;
+        streamConnection = $(this).data('streamconnection');
+        if (confirm("Is this user being inappropriate? If so, we are sorry that you had to go through that. Click confirm to remove user")) {
+          self.applyClassFilter("Blur", "." + streamConnection);
+          return self.session.forceDisconnect(streamConnection.split("stream")[1]);
+        }
+      });
     };
 
     User.prototype.subscribeStreams = function(streams) {
-      var divId, divId$, self, stream, streamConnectionId, _i, _len;
+      var stream, streamConnectionId, _i, _len, _results;
+      _results = [];
       for (_i = 0, _len = streams.length; _i < _len; _i++) {
         stream = streams[_i];
         streamConnectionId = stream.connection.connectionId;
         if (this.session.connection.connectionId === streamConnectionId) {
-          return;
+          $(".publishOption").addClass("optionSelected");
+          _results.push($(".publishOption").addClass("readyOption"));
+        } else {
+          this.createSubscriber(stream);
+          _results.push(this.streams[streamConnectionId] = stream);
         }
-        divId = "stream" + streamConnectionId;
-        $("#streams_container").append(this.userStreamTemplate({
-          id: divId
-        }));
-        this.session.subscribe(stream, divId, {
-          width: 240,
-          height: 190
-        });
-        this.applyClassFilter(this.filterData[streamConnectionId], ".stream" + streamConnectionId);
-        divId$ = $("." + divId);
-        divId$.mouseenter(function() {
-          return $(this).find('.flagUser').show();
-        });
-        divId$.mouseleave(function() {
-          return $(this).find('.flagUser').hide();
-        });
-        self = this;
-        divId$.find('.flagUser').click(function() {
-          var streamConnection;
-          streamConnection = $(this).data('streamconnection');
-          if (confirm("Is this user being inappropriate? If so, we are sorry that you had to go through that. Click confirm to remove user")) {
-            self.applyClassFilter("Blur", "." + streamConnection);
-            return self.session.forceDisconnect(streamConnection.split("stream")[1]);
-          }
-        });
       }
+      return _results;
     };
 
     User.prototype.writeChatData = function(val) {

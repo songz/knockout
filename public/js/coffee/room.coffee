@@ -26,6 +26,8 @@ class User
     @chatData = []
     @filterData = {}
     @allUsers = {}
+    @streams = {}
+    @subscribers = {}
     @printCommands() # welcome users into the room
 
     # set up OpenTok
@@ -45,6 +47,41 @@ class User
 
     # add event listeners
     self = @
+    $(".roomOption").click ->
+      if !$(@).hasClass("readyOption") then return
+      if $(@).hasClass("publishOption") and $(@).hasClass("optionSelected")
+        self.session.unpublish self.publisher
+        $(@).removeClass( "readyOption" )
+      if $(@).hasClass("publishOption") and !$(@).hasClass("optionSelected")
+        self.session.publish self.publisher
+        $(@).removeClass( "readyOption" )
+      if $(@).hasClass("textOption") and !$(@).hasClass("optionSelected")
+        for k,v of self.subscribers
+          self.removeStream( v.stream.connection.connectionId )
+          self.session.unsubscribe v
+        console.log "finished unsubscribing"
+        $(@).addClass( "optionSelected" )
+        ResizeLayoutContainer()
+        return
+      if $(@).hasClass("textOption") and $(@).hasClass("optionSelected")
+        $(@).removeClass( "optionSelected" ) #careful, order matters
+        for k,v of self.streams
+          self.createSubscriber( v )
+        ResizeLayoutContainer()
+        return
+      if $(@).hasClass("audioOption") and !$(@).hasClass("optionSelected")
+        # user decided to go audio only
+        for k,v of self.subscribers
+          v.subscribeToVideo( false )
+        $(@).addClass( "optionSelected" )
+        return
+      if $(@).hasClass("audioOption") and $(@).hasClass("optionSelected")
+        # user decided to turn off audio only
+        for k,v of self.subscribers
+          v.subscribeToVideo( true )
+        $(@).removeClass( "optionSelected" )
+        return
+
     $(".filterOption").click ->
       $(".filterOption").removeClass("optionSelected")
       prop = $(@).data('value')
@@ -56,6 +93,8 @@ class User
 
   # session and signaling events
   sessionConnectedHandler: (event) =>
+    $(".audioOption").addClass( "readyOption" )
+    $(".textOption").addClass( "readyOption" )
     console.log "session connected"
     @subscribeStreams(event.streams)
     @session.publish( @publisher )
@@ -74,14 +113,20 @@ class User
       alert "You have been disconnected! Please try again"
     window.location = "/"
   streamCreatedHandler: (event) =>
-    console.log "streamCreated"
+    $(".audioOption").addClass( "readyOption" )
+    $(".textOption").addClass( "readyOption" )
     @subscribeStreams(event.streams)
     ResizeLayoutContainer()
   streamDestroyedHandler: (event) =>
     for stream in event.streams
       if @session.connection.connectionId == stream.connection.connectionId
-        return
-      @removeStream( stream.connection.connectionId )
+        $(".publishOption").removeClass( "optionSelected" )
+        $(".publishOption").addClass( "readyOption" )
+        event.preventDefault()
+      else
+        delete @streams[ stream.connection.connectionId ]
+        delete @subscribers[ stream.connection.connectionId ]
+        @removeStream( stream.connection.connectionId )
     ResizeLayoutContainer()
   connectionCreatedHandler: ( event ) =>
     console.log "new connection created"
@@ -162,32 +207,41 @@ class User
       console.log "applyclassfilter..."+prop
   removeStream: (cid) =>
     element$ = $(".stream#{cid}")
-    element$.remove()
+    if element$ then element$.remove()
+  createSubscriber: (stream) =>
+    if $(".textOption").hasClass('optionSelected') then return
+    streamConnectionId = stream.connection.connectionId
+    divId = "stream#{streamConnectionId}"
+    $("#streams_container").append( @userStreamTemplate({ id: divId }) )
+    prop = {width:240, height:190}
+    prop.subscribeToVideo = if $(".audioOption").hasClass('optionSelected') then false else true
+    @subscribers[ streamConnectionId ] = @session.subscribe( stream, divId , prop )
+    @applyClassFilter( @filterData[ streamConnectionId ], ".stream#{streamConnectionId}" )
+
+    # bindings to mark offensive users
+    divId$ = $(".#{divId}")
+    divId$.mouseenter ->
+      $(@).find('.flagUser').show()
+    divId$.mouseleave ->
+      $(@).find('.flagUser').hide()
+
+    # mark user as offensive
+    self = @
+    divId$.find('.flagUser').click ->
+      streamConnection = $(@).data('streamconnection')
+      if confirm("Is this user being inappropriate? If so, we are sorry that you had to go through that. Click confirm to remove user")
+        self.applyClassFilter("Blur", ".#{streamConnection}")
+        self.session.forceDisconnect( streamConnection.split("stream")[1] )
   subscribeStreams: (streams) =>
     for stream in streams
       streamConnectionId = stream.connection.connectionId
       if @session.connection.connectionId == streamConnectionId
-        return
-      # create new div container for stream, subscribe, apply filter
-      divId = "stream#{streamConnectionId}"
-      $("#streams_container").append( @userStreamTemplate({ id: divId }) )
-      @session.subscribe( stream, divId , {width:240, height:190} )
-      @applyClassFilter( @filterData[ streamConnectionId ], ".stream#{streamConnectionId}" )
-
-      # bindings to mark offensive users
-      divId$ = $(".#{divId}")
-      divId$.mouseenter ->
-        $(@).find('.flagUser').show()
-      divId$.mouseleave ->
-        $(@).find('.flagUser').hide()
-
-      # mark user as offensive
-      self = @
-      divId$.find('.flagUser').click ->
-        streamConnection = $(@).data('streamconnection')
-        if confirm("Is this user being inappropriate? If so, we are sorry that you had to go through that. Click confirm to remove user")
-          self.applyClassFilter("Blur", ".#{streamConnection}")
-          self.session.forceDisconnect( streamConnection.split("stream")[1] )
+        $(".publishOption").addClass( "optionSelected" )
+        $(".publishOption").addClass( "readyOption" )
+      else
+        # create new div container for stream, subscribe, apply filter
+        @createSubscriber( stream )
+        @streams[ streamConnectionId ] = stream
   writeChatData: (val) =>
     @chatData.push( {name: val.name, text: unescape(val.text) } )
     text = val.text.split(' ')

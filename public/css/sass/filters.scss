@@ -30,10 +30,6 @@
   font-size:20px;
   color: $hdrContrastColor;
   text-align:center;
-  //position:fixed;
-  //bottom: 0px;
-  //right: 400px;
-  //left: 0px;
   background-color: #EEE;
   h1{
     display:inline;
@@ -51,14 +47,24 @@
       font-weight:normal;
       color: $light-gray;
       cursor:pointer;
+    }
+    .roomOption{
+      opacity: 0.5;
+    }
+    .filterOption, .roomOption.readyOption{
+      opacity: 1;
       &:hover{
-        background-color: $pink;
+        background-color: $light-pink;
         color: $white;
       }
-    }
-    .optionSelected{
-      background-color: $pink;
-      color: $white;
+      &.optionSelected{
+        background-color: $pink;
+        color: $white;
+        &:hover{
+          background-color: $pink;
+          color: $white;
+        }
+      }
     }
   }
 }

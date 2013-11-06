@@ -58,12 +58,19 @@
       font-weight: normal;
       color: #999999;
       cursor: pointer; }
-      .filterContainer .filterOptions .filterOption:hover, .filterContainer .filterOptions .roomOption:hover, .filterContainer .roomOptions .filterOption:hover, .filterContainer .roomOptions .roomOption:hover {
+    .filterContainer .filterOptions .roomOption, .filterContainer .roomOptions .roomOption {
+      opacity: 0.5; }
+    .filterContainer .filterOptions .filterOption, .filterContainer .filterOptions .roomOption.readyOption, .filterContainer .roomOptions .filterOption, .filterContainer .roomOptions .roomOption.readyOption {
+      opacity: 1; }
+      .filterContainer .filterOptions .filterOption:hover, .filterContainer .filterOptions .roomOption.readyOption:hover, .filterContainer .roomOptions .filterOption:hover, .filterContainer .roomOptions .roomOption.readyOption:hover {
+        background-color: rgba(159, 44, 56, 0.5);
+        color: white; }
+      .filterContainer .filterOptions .filterOption.optionSelected, .filterContainer .filterOptions .roomOption.readyOption.optionSelected, .filterContainer .roomOptions .filterOption.optionSelected, .filterContainer .roomOptions .roomOption.readyOption.optionSelected {
         background-color: #9f2c38;
         color: white; }
-    .filterContainer .filterOptions .optionSelected, .filterContainer .roomOptions .optionSelected {
-      background-color: #9f2c38;
-      color: white; }
+        .filterContainer .filterOptions .filterOption.optionSelected:hover, .filterContainer .filterOptions .roomOption.readyOption.optionSelected:hover, .filterContainer .roomOptions .filterOption.optionSelected:hover, .filterContainer .roomOptions .roomOption.readyOption.optionSelected:hover {
+          background-color: #9f2c38;
+          color: white; }
 
 .roomControls {
   margin-top: 10px; }
