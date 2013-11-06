@@ -124,6 +124,8 @@ h1 {
 #roomsContainer {
   max-height: 500px;
   overflow: auto; }
+  #roomsContainer a {
+    text-decoration: none; }
 
 #searchRoom {
   background-color: transparent;
@@ -187,6 +189,12 @@ h1 {
   font-size: 15px;
   padding: 10px;
   cursor: pointer; }
+  .roomInformation .roomContent {
+    margin-right: 120px; }
+  .roomInformation .usersCount {
+    float: right;
+    position: relative;
+    top: -30px; }
 
 input {
   vertical-align: bottom; }

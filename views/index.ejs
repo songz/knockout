@@ -58,9 +58,9 @@
 <script id="roomTemplate" type="text/x-handlebars-template">
 <div class="roomInformation" data-info="{{#lower}}{{name}} {{description}}{{/lower}}">
     <a href="{{url}}">
-      <div class="roomName">{{name}}</div>
-      <div class="roomDescription">{{description}}</div>
-      <div class="usersCount">User Count: {{usersCount}}</div>
+      <div class="roomName roomContent">{{name}}</div>
+      <div class="roomDescription roomContent">{{description}}</div>
+      <div class="usersCount">{{usersCount}} users</div>
     </a>
   </div>
 </script>
