@@ -21,14 +21,19 @@ $('#searchRoom').keyup (e) ->
 
 
 roomTemplate = Handlebars.compile( $("#roomTemplate").html() )
+
+generateRoom = (childSnapshot) ->
+  v = childSnapshot.val()
+  v.url = "/#{childSnapshot.name()}"
+  v.key = childSnapshot.name()
+  v.usersCount = if v.users then Object.keys( v.users ).length else 0
+  $("#roomsContainer").append roomTemplate( v )
+
 myRootRef = new Firebase('https://nodeknockout.firebaseIO.com/')
-myRootRef.once 'value', (dataSnapshot) ->
-  dataSnapshot.forEach (childSnapshot) ->
-    v = childSnapshot.val()
-    v.url = "/#{childSnapshot.name()}"
-    v.usersCount = if v.users then Object.keys( v.users ).length else 0
-    $("#roomsContainer").append roomTemplate( v )
-    return
+myRootRef.on 'child_added', (dataSnapshot) ->
+  generateRoom( dataSnapshot )
+myRootRef.on 'child_removed', (dataSnapshot) ->
+  $("##{dataSnapshot.name()}").remove()
 
 Handlebars.registerHelper "lower", (options) ->
   return options.fn(this).toLowerCase()

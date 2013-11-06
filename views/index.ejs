@@ -56,7 +56,7 @@
 
 
 <script id="roomTemplate" type="text/x-handlebars-template">
-<div class="roomInformation" data-info="{{#lower}}{{name}} {{description}}{{/lower}}">
+<div class="roomInformation" id="{{key}}" data-info="{{#lower}}{{name}} {{description}}{{/lower}}">
     <a href="{{url}}">
       <div class="roomName roomContent">{{name}}</div>
       <div class="roomDescription roomContent">{{description}}</div>
