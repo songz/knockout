@@ -25,6 +25,9 @@
       this.createSubscriber = function(stream) {
         return User.prototype.createSubscriber.apply(_this, arguments);
       };
+      this.createPublisher = function() {
+        return User.prototype.createPublisher.apply(_this, arguments);
+      };
       this.removeStream = function(cid) {
         return User.prototype.removeStream.apply(_this, arguments);
       };
@@ -93,10 +96,7 @@
       this.streams = {};
       this.subscribers = {};
       this.printCommands();
-      this.publisher = TB.initPublisher(this.apiKey, "myPublisher", {
-        width: 240,
-        height: 190
-      });
+      this.publisher = this.createPublisher();
       this.session = TB.initSession(this.sid);
       this.session.on("sessionConnected", this.sessionConnectedHandler);
       this.session.on("sessionDisconnected", this.sessionDisconnectedHandler);
@@ -120,6 +120,7 @@
           $(this).removeClass("readyOption");
         }
         if ($(this).hasClass("publishOption") && !$(this).hasClass("optionSelected")) {
+          self.publisher = self.createPublisher();
           self.session.publish(self.publisher);
           $(this).removeClass("readyOption");
         }
@@ -220,7 +221,6 @@
         if (this.session.connection.connectionId === stream.connection.connectionId) {
           $(".publishOption").removeClass("optionSelected");
           $(".publishOption").addClass("readyOption");
-          event.preventDefault();
         } else {
           delete this.streams[stream.connection.connectionId];
           delete this.subscribers[stream.connection.connectionId];
@@ -393,6 +393,18 @@
       if (element$) {
         return element$.remove();
       }
+    };
+
+    User.prototype.createPublisher = function() {
+      var divId;
+      divId = "myPublisher";
+      $("#publisherContainer").append($("<div />", {
+        id: divId
+      }));
+      return TB.initPublisher(this.apiKey, "myPublisher", {
+        width: 240,
+        height: 190
+      });
     };
 
     User.prototype.createSubscriber = function(stream) {

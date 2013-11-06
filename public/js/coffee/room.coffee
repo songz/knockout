@@ -31,7 +31,7 @@ class User
     @printCommands() # welcome users into the room
 
     # set up OpenTok
-    @publisher = TB.initPublisher( @apiKey, "myPublisher", {width:240, height:190} )
+    @publisher = @createPublisher()
     @session = TB.initSession( @sid )
     @session.on( "sessionConnected", @sessionConnectedHandler )
     @session.on( "sessionDisconnected", @sessionDisconnectedHandler )
@@ -53,6 +53,7 @@ class User
         self.session.unpublish self.publisher
         $(@).removeClass( "readyOption" )
       if $(@).hasClass("publishOption") and !$(@).hasClass("optionSelected")
+        self.publisher = self.createPublisher()
         self.session.publish self.publisher
         $(@).removeClass( "readyOption" )
       if $(@).hasClass("textOption") and !$(@).hasClass("optionSelected")
@@ -122,7 +123,6 @@ class User
       if @session.connection.connectionId == stream.connection.connectionId
         $(".publishOption").removeClass( "optionSelected" )
         $(".publishOption").addClass( "readyOption" )
-        event.preventDefault()
       else
         delete @streams[ stream.connection.connectionId ]
         delete @subscribers[ stream.connection.connectionId ]
@@ -208,6 +208,10 @@ class User
   removeStream: (cid) =>
     element$ = $(".stream#{cid}")
     if element$ then element$.remove()
+  createPublisher: =>
+    divId = "myPublisher"
+    $("#publisherContainer").append( $("<div />", {id: divId}) )
+    return TB.initPublisher( @apiKey, "myPublisher", {width:240, height:190} )
   createSubscriber: (stream) =>
     if $(".textOption").hasClass('optionSelected') then return
     streamConnectionId = stream.connection.connectionId
