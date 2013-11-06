@@ -1,10 +1,3 @@
-verticalCenter = ->
-  mtop = (window.innerHeight - $("#roomContainer").outerHeight())/2
-  mtop = if mtop < 40 then 50 else mtop
-  $("#roomContainer").css({"margin-top": "#{mtop}px"})
-  window.onresize = verticalCenter
-verticalCenter()
-
 $("#searchRoom").focus()
 
 $('#submitRoomButton').click ->
@@ -19,9 +12,10 @@ $('#submitRoomButton').click ->
     window.location = "/#{roomId}"
 
 $('#searchRoom').keyup (e) ->
-  if $(@).val().length > 0
+  val = $(@).val().toLowerCase()
+  if val.length > 0
     $(".roomInformation").hide()
-    $(".roomInformation[data-info*=#{$(@).val()}]").show()
+    $(".roomInformation[data-info*='#{val}']").show()
     return
   $(".roomInformation").show()
 
@@ -34,5 +28,11 @@ myRootRef.once 'value', (dataSnapshot) ->
     v.url = "/#{childSnapshot.name()}"
     v.usersCount = if v.users then Object.keys( v.users ).length else 0
     $("#roomsContainer").append roomTemplate( v )
-    verticalCenter()
     return
+
+Handlebars.registerHelper "lower", (options) ->
+  return options.fn(this).toLowerCase()
+
+$('#myModal').on 'shown.bs.modal', (e) ->
+  console.log "modal appears"
+  $("#roomName").focus()

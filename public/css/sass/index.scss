@@ -1,10 +1,13 @@
 @import "variables";
+@import "logos";
+@import "footer";
 
 html,body{
   height:100%;
 }
 body{
-  @include radialBackground( $darkBrown, $lightBrown );
+  //@include radialBackground( $darkBrown, $lightBrown );
+  background-color: #181818;
   min-height: 100%;
 }
 .container{
@@ -14,24 +17,19 @@ body{
   text-align:center;
 }
 body, input, textarea{
-  font-family: $avantFont;
+  font-family: "franklin-gothic-urw",sans-serif;
   color:#ffffff;
 }
 h1{
-  font-family: $avantFont;
+  font-family: "franklin-gothic-urw",sans-serif;
   font-size:60px;
   line-height:100%;
-  margin-top:0;
   margin-bottom:20px;
   text-transform:capitalize;
   text-align:center;
   line-height:100%;
 }
 
-#roomContainer{
-  margin-top: 50px;
-  margin-bottom: 100px;
-}
 #roomsContainer{
   max-height: 500px;
   overflow:auto;
@@ -81,6 +79,7 @@ h1{
   width: 565px;
   text-align:center;
   margin:auto;
+  margin-bottom: 10px;
 }
 
 #myModal{

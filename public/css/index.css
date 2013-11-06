@@ -16,17 +16,90 @@
 /*
  * ChatBox
  */
+/*
+ * Mixins
+ */
+/*
+ * Normalize variables
+ */
+/*
+ * Bootstrap variables
+ */
+/*
+ * Colors
+ */
+/*
+ * Layout
+ */
+/*
+ * ChatBox
+ */
+.logo-container {
+  height: 150px;
+  position: relative; }
+
+.event-logo {
+  margin-top: 38.5px;
+  background: url(/img/nko-logo.png);
+  width: 393px;
+  height: 73px; }
+
+.opentok-logo {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  margin-top: 43px;
+  background: url(/img/opentok-logo.png);
+  width: 200px;
+  height: 64px; }
+
+.ir {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent; }
+
+.sponsors {
+  margin-top: 100px; }
+  .sponsors h3 {
+    font-family: "franklin-gothic-urw",sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    color: gray;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: 0 auto;
+    width: 500px;
+    padding-bottom: 8px;
+    padding-right: 50px;
+    padding-left: 50px;
+    border-bottom: 1px solid gray; }
+
+.goinstant-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.nodefirm-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.joyent-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
+.groupon-logo {
+  width: 100px;
+  height: 100px;
+  background: red; }
+
 html, body {
   height: 100%; }
 
 body {
-  background: #433931 no-repeat center center fixed;
-  /* Old browsers */
-  background-image: radial-gradient(circle at 50% 50%, #433931, #1e1916);
-  background-image: -webkit-radial-gradient(50% 50%, circle, #433931, #1e1916);
-  background-image: -moz-radial-gradient(50% 50%, circle, #433931, #1e1916);
-  background-image: -ms-radial-gradient(50% 50%, circle, #433931, #1e1916);
-  background-image: -o-radial-gradient(50% 50%, circle, #433931, #1e1916);
+  background-color: #181818;
   min-height: 100%; }
 
 .container {
@@ -36,22 +109,17 @@ body {
   text-align: center; }
 
 body, input, textarea {
-  font-family: "AvantGardeGothicITCW01X";
+  font-family: "franklin-gothic-urw",sans-serif;
   color: #ffffff; }
 
 h1 {
-  font-family: "AvantGardeGothicITCW01X";
+  font-family: "franklin-gothic-urw",sans-serif;
   font-size: 60px;
   line-height: 100%;
-  margin-top: 0;
   margin-bottom: 20px;
   text-transform: capitalize;
   text-align: center;
   line-height: 100%; }
-
-#roomContainer {
-  margin-top: 50px;
-  margin-bottom: 100px; }
 
 #roomsContainer {
   max-height: 500px;
@@ -96,7 +164,8 @@ h1 {
 #actionItem {
   width: 565px;
   text-align: center;
-  margin: auto; }
+  margin: auto;
+  margin-bottom: 10px; }
 
 #myModal {
   color: #000; }

@@ -34,3 +34,9 @@
   background: url(/img/opentok-logo.png);
   width: 200px;
   height: 64px; }
+
+.ir {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent; }

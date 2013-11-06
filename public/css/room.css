@@ -35,6 +35,12 @@
   width: 200px;
   height: 64px; }
 
+.ir {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent; }
+
 /*
  * Mixins
  */
@@ -258,27 +264,6 @@
     color: #8D8F8F;
     float: left; }
 
-body {
-  background-color: #181818; }
-  body * {
-    box-sizing: content-box; }
-
-.meatContainer {
-  position: relative;
-  height: 300px; }
-
-.titleText {
-  position: absolute;
-  top: 0;
-  right: 260px;
-  left: 443px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 25px;
-  margin-top: 62.5px;
-  height: 73px; }
-
 .sponsors {
   margin-top: 100px; }
   .sponsors h3 {
@@ -315,8 +300,23 @@ body {
   height: 100px;
   background: red; }
 
-.ir {
-  border: 0;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent; }
+body {
+  background-color: #181818; }
+  body * {
+    box-sizing: content-box; }
+
+.meatContainer {
+  position: relative;
+  height: 300px; }
+
+.titleText {
+  position: absolute;
+  top: 0;
+  right: 260px;
+  left: 443px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 25px;
+  margin-top: 62.5px;
+  height: 73px; }

@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
   <title>Node Knockout Chat</title>
-  <% include _header_bootstrap2 %>
+  <% include _header_bootstrap3 %>
+  <% include _font_franklin %>
   <link rel="stylesheet" href="/css/index.css" />
 </head>
 <body>
 <div class="container">
+    <% include _knockout_header %>
+
+  <div class="container logo-container">
+    <h1 class="ir event-logo">Node Knockout 2013 Live</h1>
+    <h2 class="ir opentok-logo"><a href="http://tokbox.com">Powered by OpenTok</a></h2>
+  </div>
 
   <div id="roomContainer">
 
@@ -14,34 +21,42 @@
 
     <div id="infoBox">
       <input id="searchRoom" type="text" placeholder=""/>
-      <div id="actionItem">Search Rooms</div>
+      <div id="actionItem">Filter Rooms</div>
       <div id="roomsContainer"></div>
       <hr />
     </div>
 
-    <a href="#myModal" role="button" data-toggle="modal" id="createRoomButton">New Room</a>
+
+    <a href="#" role="button" data-toggle="modal" data-target="#myModal" id="createRoomButton">New Room</a>
 
   </div>
 </div>
+
+<% include _knockout_footer %>
 
 <!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Create a Knockout Room</h3>
-  </div>
-  <div class="modal-body">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Create a Knockout Room</h4>
+      </div>
+      <div class="modal-body">
     <input id="roomName" type="text" placeholder="room name" />
     <textarea id="roomDescription" name="" rows="3" placeholder="room description"></textarea>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" id="submitRoomButton">Create Room</button>
-  </div>
-</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="submitRoomButton">Create Room</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 <script id="roomTemplate" type="text/x-handlebars-template">
-  <div class="roomInformation" data-info="{{name}} {{description}}">
+<div class="roomInformation" data-info="{{#lower}}{{name}} {{description}}{{/lower}}">
     <a href="{{url}}">
       <div class="roomName">{{name}}</div>
       <div class="roomDescription">{{description}}</div>
