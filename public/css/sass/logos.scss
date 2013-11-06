@@ -1,0 +1,30 @@
+@import "variables";
+
+$logo-container-height: 150px;
+.logo-container {
+  height: $logo-container-height;
+  position:relative;
+}
+
+$event-logo-height: 73px;
+$event-logo-width: 393px;
+.event-logo {
+  margin-top: ($logo-container-height - $event-logo-height) / 2;
+  background: url(/img/nko-logo.png);
+  width: $event-logo-width;
+  height: $event-logo-height;
+}
+
+$opentok-logo-height: 64px;
+$opentok-logo-width: 200px;
+.opentok-logo {
+  position:absolute;
+  right:$containerPadding;
+  top:0;
+  margin-top: ($logo-container-height - $opentok-logo-height) / 2;
+  background: url(/img/opentok-logo.png);
+  width: $opentok-logo-width;
+  height: $opentok-logo-height;
+}
+
+

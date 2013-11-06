@@ -1,5 +1,7 @@
+@import "logos";
 @import "variables";
 @import "filters";
+@import "streamContainer";
 @import "chatBox";
 
 body {
@@ -7,53 +9,6 @@ body {
 
     background-color: #181818;
 
-    #streams_container{
-      text-align:center;
-      box-sizing: border-box;
-      position:absolute;
-      height: 100%;
-      top:0;
-      left: $containerPadding;
-      right: $chatBoxWidth+$containerPadding;
-
-      .streamContainer{
-        display: inline-block;
-        position: relative;
-        text-align:center;
-        box-sizing: border-box;
-        .OT_video-container{
-          transition: width 1s;
-          -webkit-transition: width 1s;
-        }
-      }
-
-      .subscriber_stream_content:hover .flagUser{
-      }
-
-      .flagUser{
-        position:absolute;
-        top:10px;
-        left:0px;
-        right:0px;
-        margin: auto;
-        border:none;
-        box-shadow:0.15em 0.25em 0.33em rgba(0, 0, 0, 0.3);
-        background-color:#C40A68;
-        color:white;
-        font-size:15px;
-        padding:10px;
-        border-radius:7px;
-        width: 110px;
-        height: 20px;
-        text-align:center;
-        cursor:pointer;
-        display:none;
-      }
-    }
-
-    .clickThrough{
-      pointer-events:none;
-    }
 }
 
 .meatContainer{
@@ -61,33 +16,8 @@ body {
   height: $defaultMeatHeight;
 }
 
-$logo-container-height: 150px;
-.logo-container {
-  height: $logo-container-height;
-  position:relative;
-}
-
-$event-logo-height: 73px;
-$event-logo-width: 393px;
-.event-logo {
-  margin-top: ($logo-container-height - $event-logo-height) / 2;
-  background: url(/img/nko-logo.png);
-  width: $event-logo-width;
-  height: $event-logo-height;
-}
-
-$opentok-logo-height: 64px;
-$opentok-logo-width: 200px;
-.opentok-logo {
-  position:absolute;
-  right:$containerPadding;
-  top:0;
-  margin-top: ($logo-container-height - $opentok-logo-height) / 2;
-  background: url(/img/opentok-logo.png);
-  width: $opentok-logo-width;
-  height: $opentok-logo-height;
-}
-
+// Goes in between Logos
+$roomNameFontSize: 25px;
 .titleText{
   position: absolute;
   top:0;
@@ -96,24 +26,11 @@ $opentok-logo-width: 200px;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
-  margin-top: ($logo-container-height - 36px) / 2;
+  font-size: $roomNameFontSize;
+  margin-top: ($logo-container-height - $roomNameFontSize) / 2;
   height: $event-logo-height;
 }
 
-
-$content-row-height: 600px;
-.content-row {
-  height: $content-row-height;
-}
-
-$video-chat-height: $content-row-height;
-.video-chat {
-  height: $video-chat-height;
-}
-$text-chat-height: $content-row-height;
-.text-chat {
-  height: $text-chat-height;
-}
 
 .sponsors {
   margin-top: 100px;

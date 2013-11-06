@@ -1,0 +1,36 @@
+/*
+ * Mixins
+ */
+/*
+ * Normalize variables
+ */
+/*
+ * Bootstrap variables
+ */
+/*
+ * Colors
+ */
+/*
+ * Layout
+ */
+/*
+ * ChatBox
+ */
+.logo-container {
+  height: 150px;
+  position: relative; }
+
+.event-logo {
+  margin-top: 38.5px;
+  background: url(/img/nko-logo.png);
+  width: 393px;
+  height: 73px; }
+
+.opentok-logo {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  margin-top: 43px;
+  background: url(/img/opentok-logo.png);
+  width: 200px;
+  height: 64px; }

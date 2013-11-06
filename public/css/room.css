@@ -16,6 +16,43 @@
 /*
  * ChatBox
  */
+.logo-container {
+  height: 150px;
+  position: relative; }
+
+.event-logo {
+  margin-top: 38.5px;
+  background: url(/img/nko-logo.png);
+  width: 393px;
+  height: 73px; }
+
+.opentok-logo {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  margin-top: 43px;
+  background: url(/img/opentok-logo.png);
+  width: 200px;
+  height: 64px; }
+
+/*
+ * Mixins
+ */
+/*
+ * Normalize variables
+ */
+/*
+ * Bootstrap variables
+ */
+/*
+ * Colors
+ */
+/*
+ * Layout
+ */
+/*
+ * ChatBox
+ */
 /*
  * Mixins
  */
@@ -102,6 +139,62 @@
 /*
  * ChatBox
  */
+#streams_container {
+  text-align: center;
+  box-sizing: border-box;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 15px;
+  right: 415px; }
+  #streams_container .streamContainer {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box; }
+    #streams_container .streamContainer .OT_video-container {
+      transition: width 1s;
+      -webkit-transition: width 1s; }
+  #streams_container .flagUser {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    border: none;
+    box-shadow: 0.15em 0.25em 0.33em rgba(0, 0, 0, 0.3);
+    background-color: #C40A68;
+    color: white;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 7px;
+    width: 110px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+    display: none; }
+
+.clickThrough {
+  pointer-events: none; }
+
+/*
+ * Mixins
+ */
+/*
+ * Normalize variables
+ */
+/*
+ * Bootstrap variables
+ */
+/*
+ * Colors
+ */
+/*
+ * Layout
+ */
+/*
+ * ChatBox
+ */
 #chatroom {
   background: white;
   border: 3px solid #1ba3dd;
@@ -169,65 +262,10 @@ body {
   background-color: #181818; }
   body * {
     box-sizing: content-box; }
-  body #streams_container {
-    text-align: center;
-    box-sizing: border-box;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    left: 15px;
-    right: 415px; }
-    body #streams_container .streamContainer {
-      display: inline-block;
-      position: relative;
-      text-align: center;
-      box-sizing: border-box; }
-      body #streams_container .streamContainer .OT_video-container {
-        transition: width 1s;
-        -webkit-transition: width 1s; }
-    body #streams_container .flagUser {
-      position: absolute;
-      top: 10px;
-      left: 0px;
-      right: 0px;
-      margin: auto;
-      border: none;
-      box-shadow: 0.15em 0.25em 0.33em rgba(0, 0, 0, 0.3);
-      background-color: #C40A68;
-      color: white;
-      font-size: 15px;
-      padding: 10px;
-      border-radius: 7px;
-      width: 110px;
-      height: 20px;
-      text-align: center;
-      cursor: pointer;
-      display: none; }
-  body .clickThrough {
-    pointer-events: none; }
 
 .meatContainer {
   position: relative;
   height: 300px; }
-
-.logo-container {
-  height: 150px;
-  position: relative; }
-
-.event-logo {
-  margin-top: 38.5px;
-  background: url(/img/nko-logo.png);
-  width: 393px;
-  height: 73px; }
-
-.opentok-logo {
-  position: absolute;
-  right: 15px;
-  top: 0;
-  margin-top: 43px;
-  background: url(/img/opentok-logo.png);
-  width: 200px;
-  height: 64px; }
 
 .titleText {
   position: absolute;
@@ -237,17 +275,9 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-top: 57px;
+  font-size: 25px;
+  margin-top: 62.5px;
   height: 73px; }
-
-.content-row {
-  height: 600px; }
-
-.video-chat {
-  height: 600px; }
-
-.text-chat {
-  height: 600px; }
 
 .sponsors {
   margin-top: 100px; }
