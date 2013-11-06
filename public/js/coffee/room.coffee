@@ -21,7 +21,6 @@ class User
         @myRootRef.setPriority( -Date.now() )
       , 60000
 
-
     # variables
     @initialized = false
     @chatData = []

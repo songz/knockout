@@ -22,14 +22,13 @@
 }
 
 
-#filterContainer{
+.filterContainer{
   border:1px solid #DDD;
-  height:43px;
   box-sizing: border-box;
+  padding: 15px;
   box-shadow: 1px 1px 3px #999 inset;
   font-size:20px;
   color: $hdrContrastColor;
-  padding-top:10px;
   text-align:center;
   //position:fixed;
   //bottom: 0px;
@@ -39,16 +38,16 @@
   h1{
     display:inline;
     font-size: 20px;
-    line-height: 100%;
-    padding: 0 10px;
+    line-height: 110%;
+    padding: 3px 10px;
     color: $dark-gray;
-    font-family: $avantFont;
+    font-family: "franklin-gothic-urw",sans-serif;
     font-weight:normal;
   }
-  #filterOptions{
+  .filterOptions, .roomOptions{
     display:inline;
-    .filterOption{
-      font-family: $avantFont;
+    .filterOption, .roomOption{
+      font-family: "franklin-gothic-urw",sans-serif;
       font-weight:normal;
       color: $light-gray;
       cursor:pointer;
@@ -62,4 +61,8 @@
       color: $white;
     }
   }
+}
+
+.roomControls{
+  margin-top: 10px;
 }

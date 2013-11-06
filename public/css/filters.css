@@ -34,34 +34,36 @@
   -webkit-filter: Invert(100%);
   filter: Invert(100%); }
 
-#filterContainer {
+.filterContainer {
   border: 1px solid #DDD;
-  height: 43px;
   box-sizing: border-box;
+  padding: 15px;
   box-shadow: 1px 1px 3px #999 inset;
   font-size: 20px;
   color: white;
-  padding-top: 10px;
   text-align: center;
   background-color: #EEE; }
-  #filterContainer h1 {
+  .filterContainer h1 {
     display: inline;
     font-size: 20px;
-    line-height: 100%;
-    padding: 0 10px;
+    line-height: 110%;
+    padding: 3px 10px;
     color: #444444;
-    font-family: "AvantGardeGothicITCW01X";
+    font-family: "franklin-gothic-urw",sans-serif;
     font-weight: normal; }
-  #filterContainer #filterOptions {
+  .filterContainer .filterOptions, .filterContainer .roomOptions {
     display: inline; }
-    #filterContainer #filterOptions .filterOption {
-      font-family: "AvantGardeGothicITCW01X";
+    .filterContainer .filterOptions .filterOption, .filterContainer .filterOptions .roomOption, .filterContainer .roomOptions .filterOption, .filterContainer .roomOptions .roomOption {
+      font-family: "franklin-gothic-urw",sans-serif;
       font-weight: normal;
       color: #999999;
       cursor: pointer; }
-      #filterContainer #filterOptions .filterOption:hover {
-        background-color: #1ba3dd;
+      .filterContainer .filterOptions .filterOption:hover, .filterContainer .filterOptions .roomOption:hover, .filterContainer .roomOptions .filterOption:hover, .filterContainer .roomOptions .roomOption:hover {
+        background-color: #9f2c38;
         color: white; }
-    #filterContainer #filterOptions .optionSelected {
-      background-color: #1ba3dd;
+    .filterContainer .filterOptions .optionSelected, .filterContainer .roomOptions .optionSelected {
+      background-color: #9f2c38;
       color: white; }
+
+.roomControls {
+  margin-top: 10px; }
