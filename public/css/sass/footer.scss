@@ -14,25 +14,40 @@
     padding-left: 50px;
     border-bottom:1px solid gray;
   }
+  ul {
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
+  .logo-item {
+    width: 289px;
+    height: 119px;
+    padding-left:0;
+    padding-right:0;
+    a {
+      display: inline-block;
+    }
+  }
+  .goinstant-logo {
+    background: url(/img/goinstant.png);
+  }
+  .nodefirm-logo {
+    background: url(/img/nodefirm.png);
+  }
+  .joyent-logo {
+    background: url(/img/joyent.png);
+  }
+  .groupon-logo {
+    background: url(/img/groupon.png);
+  }
+  .goinstant-logo,
+  .joyent-logo,
+  .nodefirm-logo,
+  .groupon-logo {
+    background-position: center;
+    background-repeat: no-repeat;
+    width:289px;
+    height:119px;
+  }
 }
 
-.goinstant-logo {
-  width: 100px ;
-  height: 100px ;
-  background: red;
-}
-.nodefirm-logo {
-  width: 100px ;
-  height: 100px ;
-  background: red;
-}
-.joyent-logo {
-  width: 100px ;
-  height: 100px ;
-  background: red;
-}
-.groupon-logo {
-  width: 100px ;
-  height: 100px ;
-  background: red;
-}
+
