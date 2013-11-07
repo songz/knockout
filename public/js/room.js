@@ -67,6 +67,22 @@
       this.messageTemplate = Handlebars.compile($("#messageTemplate").html());
       this.userStreamTemplate = Handlebars.compile($("#userStreamTemplate").html());
       this.notifyTemplate = Handlebars.compile($("#notifyTemplate").html());
+      this.myRootRef = new Firebase("https://nodeknockout.firebaseIO.com/" + this.rid);
+      this.myRootRef.once('value', function(dataSnapshot) {
+        _this.roomData = dataSnapshot.val();
+        return $(".titleText").text(_this.roomData.name);
+      });
+      this.presenceRef = new Firebase("https://nodeknockout.firebaseIO.com/" + this.rid + "/users");
+      this.presenceRef.once("value", function(snap) {
+        var con;
+        console.log("presenceRef callback");
+        con = _this.presenceRef.push(true);
+        con.onDisconnect().remove();
+        return window.setInterval(function() {
+          console.log("setting priority");
+          return _this.myRootRef.setPriority(-Date.now());
+        }, 60000);
+      });
       this.initialized = false;
       this.chatData = [];
       this.filterData = {};
@@ -384,7 +400,7 @@
         message: "-----------"
       }));
       this.displayChatMessage(this.notifyTemplate({
-        message: "Welcome to OpenTokRTC."
+        message: "Welcome to Knockout Chat."
       }));
       this.displayChatMessage(this.notifyTemplate({
         message: "Type /nick your_name to change your name"
