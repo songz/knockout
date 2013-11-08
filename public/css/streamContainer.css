@@ -51,6 +51,18 @@
     text-align: center;
     cursor: pointer;
     display: none; }
+  #streams_container .userName {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 13px;
+    padding: 10px;
+    text-align: center;
+    display: none; }
 
 .clickThrough {
   pointer-events: none; }

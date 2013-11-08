@@ -37,6 +37,9 @@
       this.errorSignal = function(error) {
         return User.prototype.errorSignal.apply(_this, arguments);
       };
+      this.createName = function(ele, val) {
+        return User.prototype.createName.apply(_this, arguments);
+      };
       this.inputKeypress = function(e) {
         return User.prototype.inputKeypress.apply(_this, arguments);
       };
@@ -278,6 +281,7 @@
       for (k in _ref) {
         v = _ref[k];
         this.allUsers[k] = v;
+        this.createName(".stream" + k, v);
       }
       _ref1 = event.data.filter;
       for (k in _ref1) {
@@ -306,7 +310,8 @@
     User.prototype.signalNameHandler = function(event) {
       console.log("name signal received");
       console.log(event.data);
-      return this.allUsers[event.data[0]] = event.data[1];
+      this.allUsers[event.data[0]] = event.data[1];
+      return this.createName(".stream" + event.data[0], event.data[1]);
     };
 
     User.prototype.inputKeypress = function(e) {
@@ -375,6 +380,15 @@
       }
     };
 
+    User.prototype.createName = function(ele, val) {
+      console.log("create Name called");
+      console.log(ele);
+      console.log(val);
+      if ($(ele) && $(ele).find(".userName") && $(ele).find(".userName").length > 0) {
+        return $(ele).find(".userName").text(val);
+      }
+    };
+
     User.prototype.errorSignal = function(error) {
       if (error) {
         return console.log("signal error: " + error.reason);
@@ -426,12 +440,17 @@
       prop.subscribeToVideo = $(".audioOption").hasClass('optionSelected') ? false : true;
       this.subscribers[streamConnectionId] = this.session.subscribe(stream, divId, prop);
       this.applyClassFilter(this.filterData[streamConnectionId], ".stream" + streamConnectionId);
+      if (this.allUsers[streamConnectionId]) {
+        this.createName("." + divId, this.allUsers[streamConnectionId]);
+      }
       divId$ = $("." + divId);
       divId$.mouseenter(function() {
-        return $(this).find('.flagUser').show();
+        $(this).find('.flagUser').show();
+        return $(this).find('.userName').show();
       });
       divId$.mouseleave(function() {
-        return $(this).find('.flagUser').hide();
+        $(this).find('.flagUser').hide();
+        return $(this).find('.userName').hide();
       });
       self = this;
       return divId$.find('.flagUser').click(function() {

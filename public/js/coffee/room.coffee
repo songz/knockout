@@ -151,6 +151,7 @@ class User
     if @initialized then return
     for k,v of event.data.users
       @allUsers[k] = v
+      @createName( ".stream#{k}", v )
     for k,v of event.data.filter
       @filterData[k] = v
     for e in event.data.chat
@@ -166,6 +167,7 @@ class User
     console.log "name signal received"
     console.log event.data
     @allUsers[ event.data[0] ] = event.data[1]
+    @createName( ".stream#{event.data[0]}", event.data[1] )
 
   # events
   inputKeypress: (e) =>
@@ -200,6 +202,12 @@ class User
       @session.signal( {type: "chat", data: msgData}, @errorSignal )
 
   # helpers
+  createName: (ele, val) =>
+    console.log "create Name called"
+    console.log ele
+    console.log val
+    if $(ele) and $(ele).find(".userName") and $(ele).find(".userName").length > 0
+      $(ele).find(".userName").text(val)
   errorSignal: (error) =>
     if (error)
       console.log("signal error: " + error.reason)
@@ -224,13 +232,16 @@ class User
     prop.subscribeToVideo = if $(".audioOption").hasClass('optionSelected') then false else true
     @subscribers[ streamConnectionId ] = @session.subscribe( stream, divId , prop )
     @applyClassFilter( @filterData[ streamConnectionId ], ".stream#{streamConnectionId}" )
+    if @allUsers[streamConnectionId] then @createName( ".#{divId}", @allUsers[streamConnectionId] )
 
     # bindings to mark offensive users
     divId$ = $(".#{divId}")
     divId$.mouseenter ->
       $(@).find('.flagUser').show()
+      $(@).find('.userName').show()
     divId$.mouseleave ->
       $(@).find('.flagUser').hide()
+      $(@).find('.userName').hide()
 
     # mark user as offensive
     self = @
