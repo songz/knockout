@@ -39,11 +39,15 @@ app.get("/:rid", function( req, res ){
     var info = snapshot.val();
     console.log( info );
     if( info.sid && info.sid.length > 3 ){
+      console.log( "session id generated" );
+      console.log( info.sid );
       returnRoomResponse( res, { rid: rid, sid: info.sid }, path[1]);
     }else{
       console.log(" no session id found ");
       OpenTokObject.createSession(function(sessionId){
         myRootRef.child( "sid" ).set( sessionId, function(){
+          console.log( "set session id" );
+          console.log( sessionId );
           returnRoomResponse( res, { rid: rid, sid: sessionId }, path[1]);
         });
       });
