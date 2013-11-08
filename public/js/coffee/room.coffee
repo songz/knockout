@@ -57,6 +57,9 @@ class User
         self.session.publish self.publisher
         $(@).removeClass( "readyOption" )
       if $(@).hasClass("textOption") and !$(@).hasClass("optionSelected")
+        # user decided to go text only
+        self.session.unpublish self.publisher
+        $(".publishOption").removeClass( "optionSelected" )
         for k,v of self.subscribers
           self.removeStream( v.stream.connection.connectionId )
           self.session.unsubscribe v

@@ -125,6 +125,8 @@
           $(this).removeClass("readyOption");
         }
         if ($(this).hasClass("textOption") && !$(this).hasClass("optionSelected")) {
+          self.session.unpublish(self.publisher);
+          $(".publishOption").removeClass("optionSelected");
           _ref = self.subscribers;
           for (k in _ref) {
             v = _ref[k];
