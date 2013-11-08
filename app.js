@@ -45,6 +45,8 @@ app.get("/:rid", function( req, res ){
     }else{
       console.log(" no session id found ");
       OpenTokObject.createSession(function(sessionId){
+        console.log( "sessionId generated" );
+        console.log( sessionId );
         myRootRef.child( "sid" ).set( sessionId, function(){
           console.log( "set session id" );
           console.log( sessionId );
