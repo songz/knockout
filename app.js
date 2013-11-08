@@ -37,6 +37,10 @@ app.get("/:rid", function( req, res ){
   var myRootRef = new Firebase("https://nodeknockout.firebaseIO.com/"+rid)
   myRootRef.once( "value", function( snapshot ){
     var info = snapshot.val();
+    if( !info ){
+      res.redirect('/');
+      return
+    }
     console.log( info );
     if( info.sid && info.sid.length > 3 ){
       console.log( "session id generated" );
