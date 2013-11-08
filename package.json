@@ -4,6 +4,7 @@
     "dependencies":{
       "express":"",
       "opentok":"git://github.com/opentok/opentok-node.git#ignore-ssl",
+      "firebase":"",
       "ejs":""
     }
 }
