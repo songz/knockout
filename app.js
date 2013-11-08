@@ -3,6 +3,7 @@
 // ***
 var express = require('express');
 var OpenTokLibrary = require('opentok');
+var Firebase = require('firebase');
 
 // ***
 // *** OpenTok Constants for creating Session and Token values
@@ -25,36 +26,29 @@ app.set( 'view engine', 'ejs' );
 // ***
 app.get("/", function( req, res ){
   // make sure that we are always in https
-  if(req.header('x-forwarded-proto')!="https" && process.env.NODE_ENV == "production" ){
-    res.redirect( 'https://opentokrtc.com' );
-  }else{
-    res.render( 'index' );
-  }
+  res.render( 'index' );
 });
 
-var rooms = {};
-
 app.get("/:rid", function( req, res ){
-  // make sure that we are always in https
-  console.log( req.url );
-  if(req.header('x-forwarded-proto')!="https" && process.env.NODE_ENV == "production" ){
-    res.redirect( 'https://opentokrtc.com'+req.url );
-    return;
-  }
-
   // find request format, json or html?
   var path = req.params.rid.split(".json");
   var rid = path[0];
 
-  // Generate sessionId if there are no existing session Id's
-  if( !rooms[rid] ){
-    OpenTokObject.createSession(function(sessionId){
-      rooms[rid] = sessionId;
-      returnRoomResponse( res, { rid: rid, sid: sessionId }, path[1]);
-    });
-  }else{
-    returnRoomResponse( res, { rid: rid, sid: rooms[rid] }, path[1]);
-  }
+  var myRootRef = new Firebase("https://nodeknockout.firebaseIO.com/"+rid)
+  myRootRef.once( "value", function( snapshot ){
+    var info = snapshot.val();
+    console.log( info );
+    if( info.sid && info.sid.length > 3 ){
+      returnRoomResponse( res, { rid: rid, sid: info.sid }, path[1]);
+    }else{
+      console.log(" no session id found ");
+      OpenTokObject.createSession(function(sessionId){
+        myRootRef.child( "sid" ).set( sessionId, function(){
+          returnRoomResponse( res, { rid: rid, sid: sessionId }, path[1]);
+        });
+      });
+    }
+  });
 });
 
 function returnRoomResponse( res, data, json ){
