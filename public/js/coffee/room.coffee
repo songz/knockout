@@ -227,12 +227,11 @@ class User
     if $(".textOption").hasClass('optionSelected') then return
     streamConnectionId = stream.connection.connectionId
     divId = "stream#{streamConnectionId}"
-    $("#streams_container").append( @userStreamTemplate({ id: divId }) )
+    $("#streams_container").append( @userStreamTemplate({ id: divId, name: @allUsers[streamConnectionId] }) )
     prop = {width:240, height:190}
     prop.subscribeToVideo = if $(".audioOption").hasClass('optionSelected') then false else true
     @subscribers[ streamConnectionId ] = @session.subscribe( stream, divId , prop )
     @applyClassFilter( @filterData[ streamConnectionId ], ".stream#{streamConnectionId}" )
-    if @allUsers[streamConnectionId] then @createName( ".#{divId}", @allUsers[streamConnectionId] )
 
     # bindings to mark offensive users
     divId$ = $(".#{divId}")

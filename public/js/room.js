@@ -431,7 +431,8 @@
       streamConnectionId = stream.connection.connectionId;
       divId = "stream" + streamConnectionId;
       $("#streams_container").append(this.userStreamTemplate({
-        id: divId
+        id: divId,
+        name: this.allUsers[streamConnectionId]
       }));
       prop = {
         width: 240,
@@ -440,9 +441,6 @@
       prop.subscribeToVideo = $(".audioOption").hasClass('optionSelected') ? false : true;
       this.subscribers[streamConnectionId] = this.session.subscribe(stream, divId, prop);
       this.applyClassFilter(this.filterData[streamConnectionId], ".stream" + streamConnectionId);
-      if (this.allUsers[streamConnectionId]) {
-        this.createName("." + divId, this.allUsers[streamConnectionId]);
-      }
       divId$ = $("." + divId);
       divId$.mouseenter(function() {
         $(this).find('.flagUser').show();
